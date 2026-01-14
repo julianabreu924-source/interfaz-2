@@ -1,0 +1,227 @@
+/* --- CONTENEDOR PRINCIPAL DEL MENÚ --- */
+.menu-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #000; /* Fondo negro base */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    image-rendering: pixelated; /* Mantiene la nitidez de los píxeles */
+}
+
+/* --- CONTENEDOR DE LOS BOTONES --- */
+.undertale-menu-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espaciado entre botones */
+    align-items: center;
+    margin-top: 0px; /* Reducido para elevar el menú en la pantalla */
+}
+
+/* --- ESTILO DE BOTÓN TIPO UNDERTALE/ARCANA --- */
+.undertale-btn {
+    background: rgba(50, 20, 100, 0.96); /* Color púrpura profundo con alta opacidad */
+    border: 2px solid #ffd700; /* Borde dorado real */
+    padding: 10px 40px;
+    color: #fff;
+    font-family: "Press Start 2P", cursive; /* Tipografía retro pixel */
+    font-size: 0.9rem;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 320px;
+    text-align: center;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: inset 0 0 15px rgba(255, 215, 0, 0.1); /* Brillo interno sutil */
+}
+
+/* --- ADORNOS DE LAS ESQUINAS DE LOS BOTONES --- */
+.undertale-btn::before, .undertale-btn::after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border: 2px solid #ffd700;
+}
+
+/* Posicionamiento de las esquinas decorativas */
+.undertale-btn::before { top: -6px; left: -6px; border-right: 0; border-bottom: 0; }
+.undertale-btn::after { bottom: -6px; right: -6px; border-left: 0; border-top: 0; }
+
+/* --- EFECTO HOVER (PASAR EL RATÓN POR ENCIMA) --- */
+.undertale-btn:hover {
+    color: #ffd700; /* El texto se vuelve dorado */
+    background: rgba(140, 82, 255, 0.15); /* Resplandor púrpura suave */
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.4), inset 0 0 20px rgba(140, 82, 255, 0.3);
+    transform: translateX(12px); /* El botón se desplaza ligeramente a la derecha */
+}
+
+/* --- ICONO DE GEMA (SELECTOR EXTERNO) --- */
+.undertale-btn-wrapper .crystal-icon {
+    position: absolute;
+    left: -40px; /* Posicionado fuera del botón a la izquierda */
+    width: 32px;
+    height: 32px;
+    opacity: 0;
+    transform: scale(0.5) rotate(-15deg);
+    transition: all 0.25s ease-out;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Muestra la gema cuando el usuario pasa el ratón sobre el botón */
+.undertale-btn-wrapper:hover .crystal-icon {
+    opacity: 1;
+    transform: scale(1.2) rotate(0deg);
+    filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.8)); /* Brillo dorado alrededor de la gema */
+}
+
+.undertale-btn-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* --- CUADRO DE INFORMACIÓN (TOOLTIP) --- */
+.menu-btn-tooltip-undertale {
+    position: absolute;
+    left: calc(100% + 25px); /* Aparece a la derecha del botón */
+    background: rgba(20, 10, 40, 0.95);
+    border: 2px solid #ffd700;
+    padding: 14px;
+    color: #fff;
+    font-family: "Press Start 2P", cursive;
+    font-size: 0.65rem;
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 100;
+    width: 240px;
+    line-height: 1.6;
+    box-shadow: 0 0 20px rgba(140, 82, 255, 0.2);
+}
+
+/* Muestra el tooltip al pasar el ratón */
+.undertale-btn-wrapper:hover .menu-btn-tooltip-undertale {
+    opacity: 1;
+    transform: translateX(8px);
+}
+
+/* --- SECCIÓN DEL TÍTULO --- */
+.title-section {
+    position: relative;
+    margin-bottom: 40px;
+    z-index: 10;
+}
+
+/* Estilo del título principal "RUNES OF THE REBORN" */
+.menu-title-v2 {
+    color: #ffd700; /* Dorado real */
+    font-size: min(3rem, 10vh); /* Escalado responsivo */
+    font-family: "Press Start 2P", cursive;
+    text-align: center;
+    letter-spacing: 6px;
+    margin: 0;
+    position: relative;
+    text-shadow: 
+        0 0 15px rgba(140, 82, 255, 0.6), /* Resplandor púrpura */
+        0 0 25px rgba(255, 215, 0, 0.4),  /* Resplandor dorado */
+        4px 4px 0 #000; /* Sombra negra sólida para legibilidad */
+    animation: titleFloat 4s ease-in-out infinite; /* Animación de flotado */
+}
+
+/* Animación de flotado suave del título */
+@keyframes titleFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* --- CHISPAS MÁGICAS DEL TÍTULO (Motes) --- */
+.title-mote {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #ffd700; /* Por defecto doradas */
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 5;
+    animation: titleSparkle 2s ease-out infinite;
+    mix-blend-mode: screen;
+}
+
+/* Variación de color para chispas púrpuras */
+.title-mote.purple {
+    background: #8c52ff;
+}
+
+/* Animación de destello y elevación de las chispas */
+@keyframes titleSparkle {
+    0% { transform: translateY(0) scale(0); opacity: 0; }
+    50% { opacity: 1; transform: translateY(-30px) scale(1.5); }
+    100% { transform: translateY(-60px) scale(0); opacity: 0; }
+}
+
+/* --- BOTÓN DE AJUSTES (Settings) --- */
+.settings-btn-image {
+    position: absolute;
+    top: 35px;
+    right: max(35px, env(safe-area-inset-right)); /* Soporte para notches */
+    z-index: 100;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background: transparent;
+    border: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.settings-btn-image svg {
+    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3));
+    transition: all 0.3s ease;
+}
+
+/* Rotación y cambio de color al pasar el ratón sobre engranaje */
+.settings-btn-image:hover svg {
+    transform: rotate(180deg);
+    color: #ffd700 !important;
+    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8));
+}
+
+/* --- BOTÓN DE SALIDA (Exit) --- */
+.exit-btn-v2 {
+    position: absolute;
+    top: 35px;
+    left: max(35px, env(safe-area-inset-left)); /* Soporte para notches */
+    background: transparent;
+    border: none;
+    color: #fff;
+    padding: 0;
+    cursor: pointer;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.exit-btn-v2 svg {
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+    transition: all 0.3s ease;
+}
+
+.exit-btn-v2:hover {
+    transform: none; /* Asegura que no se agrande el botón en sí, solo el icono */
+}
+
+/* El icono de salida se vuelve dorado en hover */
+.exit-btn-v2:hover svg {
+    color: #ffd700 !important;
+    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8));
+}

@@ -1,0 +1,111 @@
+/* --- CAPA SUPERPUESTA DE LA INTRODUCCIÓN --- */
+.story-intro-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: #000; /* Fondo negro puro */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    font-family: "Press Start 2P", cursive;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+/* --- CUADRO DE TEXTO CLÁSICO ESTILO RPG --- */
+.intro-content {
+    width: 80%;
+    max-width: 800px;
+    padding: 40px;
+    background: #000;
+    border: 4px solid #fff; /* Borde blanco rígido */
+    /* Efecto de borde doble pixelado */
+    box-shadow: 0 0 0 4px #000, 0 0 0 8px #fff;
+    position: relative;
+    z-index: 10;
+}
+
+/* --- ESTILO DEL TEXTO PIXEL ART --- */
+.story-text-pixel {
+    color: #fff;
+    font-size: 1.2rem;
+    text-align: left;
+    line-height: 2; /* Espaciado entre líneas amplio para legibilidad */
+    margin: 0;
+    filter: none;
+    animation: none;
+    letter-spacing: 1px;
+    word-spacing: 0.2rem;
+}
+
+.story-text-pixel span {
+    display: inline-block;
+    white-space: pre; /* Mantiene los espacios en blanco */
+}
+
+.word-wrapper {
+    display: inline-block; /* Evita que las palabras se rompan a mitad de línea */
+}
+
+/* --- MENSAJE DE "TOCA PARA CONTINUAR" --- */
+.tap-to-continue {
+    position: absolute;
+    bottom: -60px;
+    right: 0;
+    color: #fff;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+}
+
+/* --- EFECTO DE LÍNEAS DE ESCANEO (SCANLINES) PARA TOQUE RETRO --- */
+.story-intro-overlay::after {
+    content: " ";
+    position: absolute;
+    inset: 0;
+    /* Gradiente que simula líneas de TV antigua y aberración cromática sutil */
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 4px, 3px 100%;
+    pointer-events: none;
+    z-index: 20;
+}
+
+/* --- PARTÍCULAS FLOTANTES --- */
+.intro-particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.intro-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #fff;
+    box-shadow: 0 0 10px #fff; /* Pequeño resplandor */
+}
+
+/* --- ADAPTACIÓN PARA DISPOSITIVOS MÓVILES --- */
+@media (max-width: 768px) {
+    .intro-content {
+        width: 90%;
+        padding: 20px;
+        border-width: 2px;
+        box-shadow: 0 0 0 2px #000, 0 0 0 4px #fff;
+    }
+    .story-text-pixel {
+        font-size: 0.8rem;
+        line-height: 1.6;
+    }
+}
+
+/* --- CURSOR PARPADEANTE AL FINAL DEL TEXTO --- */
+.story-text-pixel::after {
+    content: "_";
+    animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
